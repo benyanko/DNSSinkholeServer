@@ -1,11 +1,15 @@
 # DNSSinkholeServer
 ## Table of contents
 * [General info](#general-info)
+* [RFC documents](#rfc-documents)
 * [Description](#description)
 * [Setup](#setup)
 
 ## General info
 This project implement a DNS Sinkhole server that blocks resolution for a given list of domains (hence the name “sinkhole”)and iteratively resolves any request for domains not included in that block-list.
+
+## RFC documents
+* [RFC 1035](https://tools.ietf.org/html/rfc1035), Domain Names - Implementation and Specification
 	
 ## Description
 Description for each file:
@@ -28,3 +32,4 @@ $ javac -d out/ -Xlint src/*.java
 $ java -cp out SinkholeServer
 $ java -cp out SinkholeServer blocklist.txt$ 
 ```
+
