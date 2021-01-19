@@ -47,12 +47,17 @@ public class DomainParser
             }
         }
 
+        if(!isInPointer)
+        {
+            LastPosition++;
+        }
+
         return LastPosition;
     }
 
     private boolean IsLabel(int i_Start)
     {
-        byte Mask = 0b1100000;
+        byte Mask = (byte) 0b11000000;
         if((this.m_Content[i_Start] & Mask) == 0)
         {
             return true;
@@ -75,8 +80,8 @@ public class DomainParser
         int Offset;
         byte Mask = 0b00111111;
 
-        Offset = ((this.m_Content[i_Start] & Mask) << 8);
-        Offset = (Offset | this.m_Content[i_Start + 1]);
+        Offset = ((this.m_Content[i_Start] & Mask) << 8) & 0x0000ff00;
+        Offset = Offset | (this.m_Content[i_Start + 1] & 0x000000ff)  ;
 
         return Offset;
     }
@@ -85,11 +90,13 @@ public class DomainParser
         return this.m_Start;
     }
 
-    public int getEnd() {
+    public int getEnd()
+    {
         return this.m_End;
     }
 
-    public StringBuilder getLabels() {
+    public StringBuilder getLabels()
+    {
         return this.m_Labels;
     }
 
