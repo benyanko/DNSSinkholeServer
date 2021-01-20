@@ -70,7 +70,7 @@ public class SinkholeServer
                 try
                 {
 
-                    query = new Message(server.receive());
+                    query = new Message(server.receiveFrom());
 
                     if (BlockListMap != null && isInBlockList(query))
                     {
@@ -111,7 +111,7 @@ public class SinkholeServer
                     currentMessage.getHeaders().setRD(true);
                     currentMessage.getHeaders().setQR(true);
                     currentMessage.getHeaders().setRA(true);
-                    server.send(currentMessage.getContent(), currentMessage.getEnd());
+                    server.sendTo(currentMessage.getContent(), currentMessage.getEnd());
                 }
                 catch (SocketException e)
                 {

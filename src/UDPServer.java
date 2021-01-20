@@ -20,7 +20,7 @@ public class UDPServer {
         this.m_ServerSocket = new DatagramSocket(this.m_Port);
     }
 
-    public byte[] receive() throws IOException
+    public byte[] receiveFrom() throws IOException
     {
         DatagramPacket receivePacket = new DatagramPacket(m_ReceiveData, m_ReceiveData.length);
         this.m_ServerSocket.receive(receivePacket);
@@ -30,11 +30,11 @@ public class UDPServer {
         return Arrays.copyOf(this.m_ReceiveData, this.m_ReceiveData.length);
     }
 
-    public void send(byte[] i_SendData, int i_Length) throws RuntimeException, IOException
+    public void sendTo(byte[] i_SendData, int i_Length) throws RuntimeException, IOException
     {
         if (this.m_IPAddress == null)
         {
-            throw new RuntimeException("server did not receive");
+            throw new RuntimeException("server did not receiveFrom");
         }
 
         DatagramPacket sendPacket = new DatagramPacket(i_SendData, i_Length, this.m_IPAddress, this.m_OutPort);
